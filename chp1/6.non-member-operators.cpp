@@ -15,10 +15,11 @@ public:
 
     // operators
     Rational & operator = ( const Rational & );
-    Rational operator + ( const Rational & ) const;
+    // Rational operator + ( const Rational & ) const;
     Rational operator - ( const Rational & ) const; 
     Rational operator * ( const Rational & ) const; 
     Rational operator / ( const Rational & ) const; 
+
 };
 
 Rational & Rational::operator = ( const Rational & rhs ) {
@@ -29,9 +30,9 @@ Rational & Rational::operator = ( const Rational & rhs ) {
     return *this;
 }
 
-Rational Rational::operator + ( const Rational & rhs ) const {
-    return Rational((_n * rhs._d) + (_d * rhs._n), _d * rhs._d);
-}
+// Rational Rational::operator + ( const Rational & rhs ) const {
+//     return Rational((_n * rhs._d) + (_d * rhs._n), _d * rhs._d);
+// }
 
 Rational Rational::operator - ( const Rational & rhs ) const {
     return Rational ((_n * rhs._d) - (_d * rhs._n), _d * rhs._d);
@@ -55,6 +56,12 @@ std::ostream & operator << (std::ostream & o, const Rational & r) {
     else return o << r.numerator() << '/' << r.denominator();
 }
 
+// (*)
+Rational operator + ( const Rational & lhs, const Rational & rhs ) {
+    return Rational((lhs.numerator() * rhs.denominator()) + (lhs.denominator() * rhs.numerator()),
+        lhs.denominator() * rhs.denominator());
+}
+
 int main() {
     const Rational a = 7;
     cout << "a is: " << a << endl;
@@ -73,4 +80,14 @@ int main() {
     cout << a << " - " << b << " = " << a - b << endl;
     cout << a << " * " << b << " = " << a * b << endl;
     cout << a << " / " << b << " = " << a / b << endl;
+
+    // 14 added to a by virtue of implicit construction
+    cout << a << " + 14 " << " = " << a + 14 << endl;
+
+    // This won't work because 14 is not a Rational type
+    // cout << "14 + " << a << " = " << 14 + a << endl;
+    
+    // after defining (*) works
+    cout << "14 + " << a << " = " << 14 + a << endl;
+
 }
