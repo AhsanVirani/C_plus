@@ -17,7 +17,7 @@ public:
 
     // operators
     Rational & operator = ( const Rational & );
-    Rational operator + ( const Rational & ) const;
+    // Rational operator + ( const Rational & ) const;
     Rational operator - ( const Rational & ) const; 
     Rational operator * ( const Rational & ) const; 
     Rational operator / ( const Rational & ) const; 
@@ -33,9 +33,9 @@ Rational & Rational::operator = ( const Rational & rhs ) {
     return *this;
 }
 
-Rational Rational::operator + ( const Rational & rhs ) const {
-    return Rational((_n * rhs._d) + (_d * rhs._n), _d * rhs._d);
-}
+// Rational Rational::operator + ( const Rational & rhs ) const {
+//     return Rational((_n * rhs._d) + (_d * rhs._n), _d * rhs._d);
+// }
 
 Rational Rational::operator - ( const Rational & rhs ) const {
     return Rational ((_n * rhs._d) - (_d * rhs._n), _d * rhs._d);
@@ -45,11 +45,14 @@ Rational Rational::operator * ( const Rational & rhs ) const {
     return Rational ((_n * rhs._n), (_d * rhs._d));
 }
 
+Rational Rational::operator / ( const Rational & rhs ) const {
+    return Rational ((_n * rhs._n), (_d * rhs._d));
+}
+
 Rational::operator std::string() const {
     if( _d == 1 ) return std::to_string(_n);
     else return std::to_string(_n) + "/" + std::to_string(_d);
 }
-
 
 Rational::~Rational() {
     _n = 0; _d = 1;
@@ -59,6 +62,11 @@ Rational::~Rational() {
 std::ostream & operator << (std::ostream & o, const Rational & r) {
     if(r.denominator() == 1) return o << r.numerator();
     else return o << r.numerator() << '/' << r.denominator();
+}
+
+Rational operator + ( const Rational & lhs, const Rational & rhs ) {
+    return Rational((lhs.numerator() * rhs.denominator()) + (lhs.denominator() * rhs.numerator()),
+        lhs.denominator() * rhs.denominator());
 }
 
 int main() {
@@ -84,4 +92,6 @@ int main() {
     cout << x << endl;
     x += b; // x = x + b -> 
     cout << x << endl;
+
+    return 0;
 }
