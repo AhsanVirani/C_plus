@@ -30,6 +30,9 @@ public:
     int size() const { return _size; }
 };
 
+
+// implementation functions would usually require .cpp files but here wont work cuz linker error
+// it is unable to link template functions so must be put in h files
 template <typename T>
 Stack<T>::Stack ( int s ) {
     if(s > maxSize || s < 1) throw StackException("Invalid Stack Size");
