@@ -13,7 +13,12 @@ Basic C++ code to revise few important concepts the language provides namely. Th
 - Inheritance
 - Ploymorphism
 - Exception Handling
-- Template Funcs
 - Destructors and Virtual Destructors
-- I/O streams
-- STL
+
+# Advance C++ Overview
+
+- Classes * Objects
+- Smart Pointers
+- Preprocessor
+- STLs
+
